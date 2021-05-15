@@ -32,15 +32,20 @@ LABEL summary="$SUMMARY" \
 EXPOSE 8080
 EXPOSE 8443
 
+COPY ./pip-21.1.1.tar.gz ./pip-21.1.1.tar.gz
+
 RUN yum update -y && \
     yum install -y yum-utils && \
     yum install -y centos-release-scl epel-release && \
+    yum install -y python3 && \
     INSTALL_PKGS="gettext hostname nss_wrapper bind-utils httpd24 httpd24-mod_ssl httpd24-mod_ldap httpd24-mod_session httpd24-mod_auth_mellon httpd24-mod_security openssl" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
-    yum install -y python3-pip && \
-    pip3 install --upgrade pip && \
-    yum -y clean all --enablerepo='*'
+    python3 -m pip install ./pip-21.1.1.tar.gz && \
+    yum -y clean all --enablerepo='*' && \
+    rm -rf /var/cache/yum && \
+    rm -f ./pip-21.1.1.tar.gz
+
 
 ENV HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
     HTTPD_APP_ROOT=${APP_ROOT} \
