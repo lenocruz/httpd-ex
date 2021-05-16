@@ -39,7 +39,8 @@ RUN yum update -y && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum install -y python3-pip && \
-    pip3 install --upgrade pip && \
+    pip3 install 
+    #--upgrade pip && \
     yum -y clean all --enablerepo='*'
 
 ENV HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
