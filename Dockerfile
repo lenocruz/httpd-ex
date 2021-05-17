@@ -40,7 +40,10 @@ RUN yum update -y && \
     rpm -V $INSTALL_PKGS && \
     yum install -y python3-pip && \
     pip3 install --upgrade pip && \
+    mkdir -p /var/www/html/test && \
     yum -y clean all --enablerepo='*'
+    
+COPY ./index.html /var/www/html/test
 
 ENV HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
     HTTPD_APP_ROOT=${APP_ROOT} \
