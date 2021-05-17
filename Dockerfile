@@ -40,7 +40,7 @@ RUN yum update -y && \
     rpm -V $INSTALL_PKGS && \
     yum install -y python3-pip && \
     pip3 install --upgrade pip && \
-    mkdir -p /var/www/html/test && \
+    mkdir -p /var/www/html/test/ && \
     yum -y clean all --enablerepo='*'
     
 COPY ./index.html /var/www/html/test
