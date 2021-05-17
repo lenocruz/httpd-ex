@@ -43,7 +43,7 @@ RUN yum update -y && \
     mkdir -p /var/www/html/test/ && \
     yum -y clean all --enablerepo='*'
     
-COPY ./index.html /var/www/html/test
+COPY ./index.html /var/www/html/test/index.html
 
 ENV HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/ \
     HTTPD_APP_ROOT=${APP_ROOT} \
